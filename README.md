@@ -2,7 +2,39 @@
 
 A production-grade TypeScript implementation of the UPS Rating API with extensible architecture for multi-carrier support.
 
-## 🏗️ Architecture
+## 🎯 Design Decisions
+
+### Key Architectural Choices
+
+**Interface-Driven Design**: All carriers implement `ICarrier` interface for consistency and extensibility.
+
+**Separation of Concerns**: Authentication (`OAuthManager`), HTTP (`HTTPClient`), and business logic (`RateService`) are isolated for testability.
+
+**Type Safety + Runtime Validation**: TypeScript for compile-time safety + Zod for runtime validation of external API responses.
+
+**OAuth Token Caching**: In-memory caching with 5-minute expiry buffer balances performance and reliability.
+
+**Structured Error Handling**: Custom error classes extending `CarrierIntegrationError` provide meaningful error context.
+
+**Mock-First Testing**: Stubbed HTTP responses ensure reliable tests without API dependencies.
+
+**Environment Configuration**: All secrets from environment variables for security and deployment flexibility.
+
+### Technical Trade-offs
+
+- **Zod vs Class Validator**: Chose Zod for TypeScript-first approach and better error messages
+- **Axios vs Fetch**: Chose Axios for production features (timeouts, retries, error handling)
+- **In-Memory vs Redis Caching**: Chose in-memory for simplicity; can upgrade to Redis without breaking interface
+
+### Extensibility Pattern
+```typescript
+// Add new carrier by implementing ICarrier interface
+export class NewCarrier implements ICarrier {
+  async getRates(request: RateRequest): Promise<RateQuote[]> { ... }
+}
+```
+
+## ��️ Architecture
 
 ```
 src/
