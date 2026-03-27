@@ -27,7 +27,7 @@ A production-grade TypeScript implementation of the UPS Rating API with extensib
 
 ```
 src/
-├── auth/                  # Authentication logic
+├── auth/                 # Authentication logic
 │   └── OAuthManager.ts    
 ├── carriers/             # Carrier implementations
 │   └── ups/
