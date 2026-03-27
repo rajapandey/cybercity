@@ -20,19 +20,8 @@ A production-grade TypeScript implementation of the UPS Rating API with extensib
 
 **Environment Configuration**: All secrets from environment variables for security and deployment flexibility.
 
-### Technical Trade-offs
+**In-Memory vs Redis Caching**: Chose in-memory for simplicity; can upgrade to Redis without breaking interface
 
-- **Zod vs Class Validator**: Chose Zod for TypeScript-first approach and better error messages
-- **Axios vs Fetch**: Chose Axios for production features (timeouts, retries, error handling)
-- **In-Memory vs Redis Caching**: Chose in-memory for simplicity; can upgrade to Redis without breaking interface
-
-### Extensibility Pattern
-```typescript
-// Add new carrier by implementing ICarrier interface
-export class NewCarrier implements ICarrier {
-  async getRates(request: RateRequest): Promise<RateQuote[]> { ... }
-}
-```
 
 ## ��️ Architecture
 
